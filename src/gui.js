@@ -3510,28 +3510,30 @@ IDE_Morph.prototype.projectMenu = function () {
         'Select categories of additional blocks to add to this project.'
     );
 
-    menu.addItem(
-        localize(graphicsName) + '...',
-        function () {
-            if (location.protocol === 'file:') {
-                myself.importLocalFile();
-                return;
-            }
-            myself.importMedia(graphicsName);
-        },
-        'Select a costume from the media library'
-    );
-    menu.addItem(
-        localize('Sounds') + '...',
-        function () {
-            if (location.protocol === 'file:') {
-                myself.importLocalFile();
-                return;
-            }
-            myself.importMedia('Sounds');
-        },
-        'Select a sound from the media library'
-    );
+    if (shiftClicked) {
+        menu.addItem(
+            localize(graphicsName) + '...',
+            function () {
+                if (location.protocol === 'file:') {
+                    myself.importLocalFile();
+                    return;
+                }
+                myself.importMedia(graphicsName);
+            },
+            'Select a costume from the media library'
+        );
+        menu.addItem(
+            localize('Sounds') + '...',
+            function () {
+                if (location.protocol === 'file:') {
+                    myself.importLocalFile();
+                    return;
+                }
+                myself.importMedia('Sounds');
+            },
+            'Select a sound from the media library'
+        );
+    }    
 
     menu.popup(world, pos);
 };
