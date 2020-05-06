@@ -3389,12 +3389,18 @@ IDE_Morph.prototype.projectMenu = function () {
         shiftClicked = (world.currentKey === 16);
 
     menu = new MenuMorph(this);
-    menu.addItem('Project notes...', 'editProjectNotes');
-    menu.addLine();
-    menu.addPair('New', 'createNewProject', '^N');
-    menu.addPair('Open...', 'openProjectsBrowser', '^O');
-    // menu.addPair('Save', "save", '^S');
-    // menu.addItem('Save As...', 'saveProjectsBrowser');
+    
+    
+    // Hide some element (Alessandro)
+    if (shiftClicked){
+        menu.addItem('Project notes...', 'editProjectNotes');
+        menu.addLine();
+        menu.addPair('New', 'createNewProject', '^N');
+        menu.addPair('Open...', 'openProjectsBrowser', '^O');
+        menu.addPair('Save', "save", '^S');
+        menu.addItem('Save As...', 'saveProjectsBrowser');
+    }
+    
     menu.addLine();
     menu.addItem(
         'Import...',
@@ -3438,25 +3444,34 @@ IDE_Morph.prototype.projectMenu = function () {
     );
 
     if (this.stage.globalBlocks.length) {
-        menu.addItem(
-            'Export blocks...',
-            function () {myself.exportGlobalBlocks(); },
-            'show global custom block definitions as XML' +
-                '\nin a new browser window'
-        );
-        menu.addItem(
-            'Unused blocks...',
-            function () {myself.removeUnusedBlocks(); },
-            'find unused global custom blocks' +
-                '\nand remove their definitions'
-        );
+
+        // Hide some element (Alessandro)
+        if (shiftClicked){
+            menu.addItem(
+                'Export blocks...',
+                function () {myself.exportGlobalBlocks(); },
+                'show global custom block definitions as XML' +
+                    '\nin a new browser window'
+            );
+
+            menu.addItem(
+                'Unused blocks...',
+                function () {myself.removeUnusedBlocks(); },
+                'find unused global custom blocks' +
+                    '\nand remove their definitions'
+            );
+        }        
     }
 
-    menu.addItem(
-        'Export summary...',
-        function () {myself.exportProjectSummary(); },
-        'open a new browser browser window\n with a summary of this project'
-    );
+    // Hide some element (Alessandro)
+    if (shiftClicked){
+        menu.addItem(
+            'Export summary...',
+            function () {myself.exportProjectSummary(); },
+            'open a new browser browser window\n with a summary of this project'
+        );
+    }
+    
 
     if (shiftClicked) {
         menu.addItem(
